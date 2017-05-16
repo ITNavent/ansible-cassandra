@@ -1,0 +1,14 @@
+---
+- name: Add cassandra deb repository
+  apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian {{ cassandra_series_version }} main' state=present
+
+- name: Install cassandra repository keys
+  apt_key: url='https://www.apache.org/dist/cassandra/KEYS' state=present
+
+- name: install cassandra packages
+  apt: pkg=cassandra state=latest update_cache=yes force=yes
+  notify: restart cassandra
+
+- name: copy cassandra conf
+  template: src=cassandra.yaml.j2 dest=/etc/cassandra/cassandra.yaml
+  notify: reload cassandra
