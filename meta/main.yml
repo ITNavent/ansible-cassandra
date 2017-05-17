@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Carlos
+  description: Cassandra deployment
+  company: Navent
+  license: BSD
+  min_ansible_version: 0.1
+  platforms:
+  - name: Ubuntu
+    versions:
+    - Yakkety
+  categories:
+    - web
+dependencies: []
