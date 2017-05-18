@@ -112,7 +112,7 @@ unlogged_batch_across_partitions_warn_threshold: 10
 compaction_large_partition_warning_threshold_mb: 100
 gc_warn_threshold_in_ms: 1000
 back_pressure_enabled: false
-back_pressure_strategyclass_name: org.apache.cassandra.net.RateBasedBackPressure
-back_pressure_strategyhigh_ratio: 0.90
-back_pressure_strategyfactor: 5
-back_pressure_strategyflow: FAST
+back_pressure_strategy_class_name: org.apache.cassandra.net.RateBasedBackPressure
+back_pressure_strategy_high_ratio: 0.90
+back_pressure_strategy_factor: 5
+back_pressure_strategy_flow: FAST
