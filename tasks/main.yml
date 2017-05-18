@@ -11,4 +11,8 @@
 
 - name: copy cassandra conf
   template: src=cassandra.yaml.j2 dest=/etc/cassandra/cassandra.yaml
-  notify: restart cassandra
+
+-name: copy cassandra env
+  -template:
+    src: cassandra-env.sh.j2 dest=/etc/cassandra/cassandra-env.sh
+    mode: '0770'
