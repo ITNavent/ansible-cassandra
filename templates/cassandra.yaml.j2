@@ -417,11 +417,11 @@ seed_provider:
     # Cassandra nodes use this list of hosts to find each other and learn
     # the topology of the ring.  You must change this if you are running
     # multiple nodes!
-    - class_name: {{seed_provider.class_name}}
+    - class_name: {{seed_provider_class_name}}
       parameters:
           # seeds is actually a comma-delimited list of addresses.
           # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: {{seed_provider.seeds}}
+          - seeds: {{seed_provider_seeds}}
 
 # For workloads with more data than can fit in memory, Cassandra's
 # bottleneck will be reads that need to fetch data from
@@ -1028,11 +1028,11 @@ request_scheduler: {{request_scheduler}}
 # http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore
 #
 server_encryption_options:
-    internode_encryption: {{server_encryption.internode_encryption}}
-    keystore: {{server_encryption.keystore}}
-    keystore_password: {{server_encryption.keystore_password}}
-    truststore: {{server_encryption.truststore}}
-    truststore_password: {{server_encryption.truststore_password}}
+    internode_encryption: {{server_encryption_internode_encryption}}
+    keystore: {{server_encryption_keystore}}
+    keystore_password: {{server_encryption_keystore_password}}
+    truststore: {{server_encryption_truststore}}
+    truststore_password: {{server_encryption_truststore_password}}
     # More advanced defaults below:
     # protocol: TLS
     # algorithm: SunX509
@@ -1043,11 +1043,11 @@ server_encryption_options:
 
 # enable or disable client/server encryption.
 client_encryption_options:
-    enabled: {{client_encryption.enabled}}
+    enabled: {{client_encryption_enabled}}
     # If enabled and optional is set to true encrypted and unencrypted connections are handled.
-    optional: {{client_encryption.optional}}
-    keystore: {{client_encryption.keystore}}
-    keystore_password: {{client_encryption.keystore_password}}
+    optional: {{client_encryption_optional}}
+    keystore: {{client_encryption_keystore}}
+    keystore_password: {{client_encryption_keystore_password}}
     # require_client_auth: false
     # Set trustore and truststore_password if require_client_auth is true
     # truststore: conf/.truststore
@@ -1119,19 +1119,19 @@ windows_timer_interval: {{windows_timer_interval}}
 # Currently, only the following file types are supported for transparent data encryption, although
 # more are coming in future cassandra releases: commitlog, hints
 transparent_data_encryption_options:
-    enabled: {{transparent_data_encryption.enabled}}
-    chunk_length_kb: {{transparent_data_encryption.chunk_length_kb}}
-    cipher: {{transparent_data_encryption.cipher}}
-    key_alias: {{transparent_data_encryption.key_alias}}
-    # CBC IV length for AES needs to be 16 bytes (which is also the default size)
-    # iv_length: 16
-    key_provider: 
-      - class_name: {{transparent_data_encryption.class_name}}
-        parameters: 
-          - keystore: {{transparent_data_encryption.keystore}}
-            keystore_password: {{transparent_data_encryption.keystore_password}}
-            store_type: {{transparent_data_encryption.store_type}}
-            key_password: {{transparent_data_encryption.key_password}}
+    enabled: {{transparent_data_encryption_enabled}}
+    chunk_length_kb: {{transparent_data_encryption_chunk_length_kb}}
+    cipher: {{transparent_data_encryption_cipher}}
+    key_alias: {{transparent_data_encryption_key_alias}}
+# CBC IV length for AES needs to be 16 bytes (which is also the default size)
+# iv_length: 16
+key_provider: 
+  - class_name: {{key_provider_class_name}}
+    parameters: 
+      - keystore: {{key_provider_keystore}}
+        keystore_password: {{key_provider_keystore_password}}
+        store_type: {{key_provider_store_type}}
+        key_password: {{key_provider_key_password}}
 
 
 #####################
@@ -1189,8 +1189,8 @@ back_pressure_enabled: {{back_pressure_enabled}}
 # New strategies can be added. Implementors need to implement org.apache.cassandra.net.BackpressureStrategy and
 # provide a public constructor accepting a Map<String, Object>.
 back_pressure_strategy:
-    - class_name: {{back_pressure_strategy.class_name}}
+    - class_name: {{back_pressure_strategy_class_name}}
       parameters:
-        - high_ratio: {{back_pressure_strategy.high_ratio}}
-          factor: {{back_pressure_strategy.factor}}
-          flow: {{back_pressure_strategy.flow}}
+        - high_ratio: {{back_pressure_strategy_high_ratio}}
+          factor: {{back_pressure_strategy_factor}}
+          flow: {{back_pressure_strategy_flow}}
