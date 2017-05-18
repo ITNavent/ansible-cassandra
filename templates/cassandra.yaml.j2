@@ -1123,16 +1123,15 @@ transparent_data_encryption_options:
     chunk_length_kb: {{transparent_data_encryption_chunk_length_kb}}
     cipher: {{transparent_data_encryption_cipher}}
     key_alias: {{transparent_data_encryption_key_alias}}
-<<<<<<< HEAD
-# CBC IV length for AES needs to be 16 bytes (which is also the default size)
-# iv_length: 16
-key_provider: 
-  - class_name: {{key_provider_class_name}}
-    parameters: 
-      - keystore: {{key_provider_keystore}}
-        keystore_password: {{key_provider_keystore_password}}
-        store_type: {{key_provider_store_type}}
-        key_password: {{key_provider_key_password}}
+    # CBC IV length for AES needs to be 16 bytes (which is also the default size)
+    # iv_length: 16
+    key_provider: 
+      - class_name: {{key_provider_class_name}}
+        parameters: 
+         - keystore: {{key_provider_keystore}}
+           keystore_password: {{key_provider_keystore_password}}
+           store_type: {{key_provider_store_type}}
+           key_password: {{key_provider_key_password}}
 
 
 #####################

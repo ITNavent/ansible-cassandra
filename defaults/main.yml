@@ -98,7 +98,7 @@ windows_timer_interval: 1
 transparent_data_encryption_enabled: false
 transparent_data_encryption_chunk_length_kb: 64
 transparent_data_encryption_cipher: AES/CBC/PKCS5Padding
-transparent_data_encryption_key_alias: testing.1
+transparent_data_encryption_key_alias: testing:1
 key_provider_class_name: org.apache.cassandra.security.JKSKeyProvider
 key_provider_keystore: conf/.keystore
 key_provider_keystore_password: cassandra
