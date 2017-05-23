@@ -53,6 +53,7 @@ listen_address: 127.0.0.1
 start_native_transport: true
 native_transport_port: 9042
 start_rpc: false
+broadcast_rpc_address: 127.0.0.1
 rpc_address: 127.0.0.1
 rpc_port: 9160
 rpc_keepalive: true
