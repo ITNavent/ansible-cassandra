@@ -1,3 +1,4 @@
 ---
 - name: restart cassandra
-  action: service name=cassandra state=restarted enabled=yes
+  action: service name=cassandra state=started enabled=yes
+  become: true

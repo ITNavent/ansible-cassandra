@@ -8,6 +8,21 @@
 - name: install cassandra packages
   apt: pkg=cassandra state=latest update_cache=yes force=yes
 
+## initialize cluster
+- name: Stop service
+  service: name=cassandra state=stopped
+
+- shell: "rm -rf /var/lib/cassandra/commitlog/*"
+  become: true
+
+- shell: "rm -rf /var/lib/cassandra/saved_caches/*"
+  become: true
+
+- shell: "rm -rf /var/lib/cassandra/data/system/*"
+  become: true
+
+- debug: msg="Cassandra {{seed_provider_seeds}} {{listen_address}}"
+
 - name: copy cassandra conf
   template: src=cassandra.yaml.j2 dest=/etc/cassandra/cassandra.yaml
 
