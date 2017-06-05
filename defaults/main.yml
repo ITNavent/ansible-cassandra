@@ -10,9 +10,10 @@ hinted_handoff_throttle_in_kb: 1024
 max_hints_delivery_threads: 2
 hints_flush_period_in_ms: 10000
 max_hints_file_size_in_mb: 128
+hints_directory: /var/lib/cassandra/hints *********************************
 batchlog_replay_throttle_in_kb: 1024
-authenticator: AllowAllAuthenticator
-authorizer: AllowAllAuthorizer
+authenticator: org.apache.cassandra.auth.AllowAllAuthenticator
+authorizer: org.apache.cassandra.auth.AllowAllAuthorizer
 role_manager: CassandraRoleManager
 roles_validity_in_ms: 2000
 permissions_validity_in_ms: 2000
@@ -36,6 +37,8 @@ saved_caches_directory: /var/lib/cassandra/saved_caches
 commitlog_sync: periodic
 commitlog_sync_period_in_ms: 10000
 commitlog_segment_size_in_mb: 32
+commitlog_total_space_in_mb: 8192
+concurrent_compactors: 1
 seed_provider_class_name: org.apache.cassandra.locator.SimpleSeedProvider
 seed_provider_seeds: "127.0.0.1"
 concurrent_reads: 32
@@ -49,6 +52,7 @@ trickle_fsync: false
 trickle_fsync_interval_in_kb: 10240
 storage_port: 7000
 ssl_storage_port: 7001
+stream_throughput_outbound_megabits_per_sec: 200
 listen_address: 127.0.0.1
 broadcast_address: 127.0.0.1
 start_native_transport: true
@@ -59,6 +63,8 @@ rpc_address: 127.0.0.1
 rpc_port: 9160
 rpc_keepalive: true
 rpc_server_type: sync
+rpc_min_threads: 16
+rpc_max_threads: 2048
 thrift_framed_transport_size_in_mb: 15
 incremental_backups: false
 snapshot_before_compaction: false

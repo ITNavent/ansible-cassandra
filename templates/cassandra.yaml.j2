@@ -70,7 +70,7 @@ max_hints_delivery_threads: {{max_hints_delivery_threads}}
 
 # Directory where Cassandra should store hints.
 # If not set, the default directory is $CASSANDRA_HOME/data/hints.
-# hints_directory: /usr/local/var/lib/cassandra/hints
+hints_directory: {{hints_directory}}
 
 # How often hints should be flushed from the internal buffers to disk.
 # Will *not* trigger fsync.
@@ -506,7 +506,7 @@ memtable_allocation_type: {{memtable_allocation_type}}
 # The default value is the smaller of 8192, and 1/4 of the total space
 # of the commitlog volume.
 #
-# commitlog_total_space_in_mb: 8192
+commitlog_total_space_in_mb: {{commitlog_total_space_in_mb}}
 
 # This sets the number of memtable flush writer threads per disk
 # as well as the total number of memtables that can be flushed concurrently.
@@ -729,8 +729,8 @@ rpc_server_type: {{rpc_server_type}}
 # encouraged to set a maximum that makes sense for you in production, but do keep in mind that
 # rpc_max_threads represents the maximum number of client requests this server may execute concurrently.
 #
-# rpc_min_threads: 16
-# rpc_max_threads: 2048
+rpc_min_threads: {{ rpc_min_threads }}
+rpc_max_threads: {{ rpc_max_threads }}
 
 # uncomment to set socket buffer sizes on rpc connections
 # rpc_send_buff_size_in_bytes:
@@ -808,7 +808,7 @@ column_index_cache_size_in_kb: {{column_index_cache_size_in_kb}}
 # 
 # If your data directories are backed by SSD, you should increase this
 # to the number of cores.
-#concurrent_compactors: 1
+concurrent_compactors: {{}}
 
 # Throttles compaction to the given total throughput across the entire
 # system. The faster you insert data, the faster you need to compact in
@@ -829,7 +829,7 @@ sstable_preemptive_open_interval_in_mb: {{sstable_preemptive_open_interval_in_mb
 # mostly sequential IO when streaming data during bootstrap or repair, which
 # can lead to saturating the network connection and degrading rpc performance.
 # When unset, the default is 200 Mbps or 25 MB/s.
-# stream_throughput_outbound_megabits_per_sec: 200
+stream_throughput_outbound_megabits_per_sec: {{stream_throughput_outbound_megabits_per_sec}}
 
 # Throttles all streaming file transfer between the datacenters,
 # this setting allows users to throttle inter dc stream throughput in addition
