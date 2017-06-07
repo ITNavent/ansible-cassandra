@@ -8,6 +8,7 @@
 - name: install cassandra packages
   apt: pkg=cassandra state=latest update_cache=yes force=yes
 
+## recommended settings
 - name: modify memlock parameter
   pam_limits: domain=cassandra limit_type=- limit_item=memlock value=unlimited
 
@@ -19,6 +20,21 @@
 
 - name: modify as parameter
   pam_limits: domain=cassandra limit_type=- limit_item=as value=unlimited
+
+- name: install jemalloc library
+  apt: pkg=libjemalloc1 state=latest update_cache=yes force=yes
+
+- name: swap - disable swap
+  command: swapoff --all
+  ignore_errors: yes
+  become: yes
+
+- name: swap - remove current swaps from fstab
+  lineinfile:
+    dest: /etc/fstab
+    regexp: '^/[\S]+\s+none\s+swap '
+    state: absent
+  become: yes
 
 ## initialize cluster
 - name: Stop service
