@@ -8,6 +8,18 @@
 - name: install cassandra packages
   apt: pkg=cassandra state=latest update_cache=yes force=yes
 
+- name: modify memlock parameter
+  pam_limits: domain=cassandra limit_type=- limit_item=memlock value=unlimited
+
+- name: modify nofile parameter
+  pam_limits: domain=cassandra limit_type=- limit_item=nofile value=100000
+
+- name: modify nproc parameter
+  pam_limits: domain=cassandra limit_type=- limit_item=nproc value=32768
+
+- name: modify as parameter
+  pam_limits: domain=cassandra limit_type=- limit_item=as value=unlimited
+
 ## initialize cluster
 - name: Stop service
   service: name=cassandra state=stopped
