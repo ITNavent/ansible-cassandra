@@ -10,7 +10,7 @@ hinted_handoff_throttle_in_kb: 1024
 max_hints_delivery_threads: 2
 hints_flush_period_in_ms: 10000
 max_hints_file_size_in_mb: 128
-hints_directory: /var/lib/cassandra/hints *********************************
+hints_directory: /var/lib/cassandra/hints
 batchlog_replay_throttle_in_kb: 1024
 authenticator: org.apache.cassandra.auth.AllowAllAuthenticator
 authorizer: org.apache.cassandra.auth.AllowAllAuthorizer
