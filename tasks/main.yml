@@ -29,10 +29,6 @@
   become: yes
 
 ## install cassandra
-- shell: dpkg-query -W 'cassandra'
-  ignore_errors: True
-  register: cassandra_exists
-
 - name: Add cassandra deb repository
   apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian {{ cassandra_series_version }} main' state=present
 
@@ -41,6 +37,7 @@
 
 - name: install cassandra packages
   apt: pkg=cassandra state=latest update_cache=yes force=yes
+  register: cassandra_exists
 
 ## initialize cluster
 - name: Stop service
@@ -48,15 +45,15 @@
 
 - shell: "rm -rf /var/lib/cassandra/commitlog/*"
   become: true
-  when: cassandra_exists|failed
+  when: cassandra_exists.changed
 
 - shell: "rm -rf /var/lib/cassandra/saved_caches/*"
   become: true
-  when: cassandra_exists|failed
+  when: cassandra_exists.changed
 
 - shell: "rm -rf /var/lib/cassandra/data/system/*"
   become: true
-  when: cassandra_exists|failed
+  when: cassandra_exists.changed
 
 - debug: msg="Cassandra {{seed_provider_seeds}} {{listen_address}}"
 
