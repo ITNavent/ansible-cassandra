@@ -30,13 +30,21 @@
 
 ## install cassandra
 - name: Add cassandra deb repository
-  apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian {{ cassandra_series_version }} main' state=present
+  apt_repository:
+    repo: 'deb http://www.apache.org/dist/cassandra/debian {{ cassandra_series_version }} main'
+    state: present
 
 - name: Install cassandra repository keys
-  apt_key: url='https://www.apache.org/dist/cassandra/KEYS' state=present
+  apt_key:
+    url: 'https://www.apache.org/dist/cassandra/KEYS'
+    state: present
 
 - name: install cassandra packages
-  apt: pkg=cassandra state=latest update_cache=yes force=yes
+  apt:
+    pkg: cassandra
+    state: latest
+    update_cache: yes
+    force: yes
   register: cassandra_exists
 
 ## initialize cluster
@@ -61,13 +69,20 @@
   become: true
   when: cassandra_exists.changed
 
-- debug: msg="Cassandra {{seed_provider_seeds}} {{listen_address}}"
+- debug:
+    msg: "Cassandra {{seed_provider_seeds}} {{listen_address}}"
 
 - name: copy cassandra conf
-  template: src=cassandra.yaml.j2 dest=/etc/cassandra/cassandra.yaml
+  template:
+    src: cassandra.yaml.j2
+    dest: /etc/cassandra/cassandra.yaml
+    backup: yes
 
 - name: copy cassandra env
-  template: src=cassandra-env.sh.j2 dest=/etc/cassandra/cassandra-env.sh mode='0644'
+  template:
+    src: cassandra-env.sh.j2
+    dest: /etc/cassandra/cassandra-env.sh mode='0644'
+    backup: yes
 
 - name: restart cassandra
   command: echo "cassandra configuration changed"
