@@ -1,6 +1,9 @@
 ---
 
 ## /etc/cassandra/cassandra.yaml
+
+cassandra_home: /var/lib/cassandra
+
 cassandra_series_version: 310x
 cluster_name: "cassandra-cluster"
 num_tokens: 256
@@ -10,7 +13,7 @@ hinted_handoff_throttle_in_kb: 1024
 max_hints_delivery_threads: 2
 hints_flush_period_in_ms: 10000
 max_hints_file_size_in_mb: 128
-hints_directory: /var/lib/cassandra/hints
+hints_directory: "{{ cassandra_home }}/hints"
 batchlog_replay_throttle_in_kb: 1024
 authenticator: org.apache.cassandra.auth.AllowAllAuthenticator
 authorizer: org.apache.cassandra.auth.AllowAllAuthorizer
@@ -20,8 +23,8 @@ permissions_validity_in_ms: 2000
 credentials_validity_in_ms: 2000
 partitioner: org.apache.cassandra.dht.Murmur3Partitioner
 data_file_directories:
-    - /var/lib/cassandra/data
-commitlog_directory: /var/lib/cassandra/commitlog
+    - "{{ cassandra_home }}/data"
+commitlog_directory: "{{ cassandra_home }}/commitlog"
 cdc_enabled: false
 disk_failure_policy: stop
 commit_failure_policy: stop
@@ -33,7 +36,7 @@ row_cache_size_in_mb: 0
 row_cache_save_period: 0
 counter_cache_size_in_mb:
 counter_cache_save_period: 7200
-saved_caches_directory: /var/lib/cassandra/saved_caches
+saved_caches_directory: "{{ cassandra_home }}/saved_caches"
 commitlog_sync: periodic
 commitlog_sync_period_in_ms: 10000
 commitlog_segment_size_in_mb: 32
@@ -124,3 +127,5 @@ back_pressure_strategy_class_name: org.apache.cassandra.net.RateBasedBackPressur
 back_pressure_strategy_high_ratio: 0.90
 back_pressure_strategy_factor: 5
 back_pressure_strategy_flow: FAST
+
+cdc_raw_directory: "{{ cassandra_home }}/cdc_raw"
