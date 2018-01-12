@@ -43,15 +43,21 @@
 - name: Stop service
   service: name=cassandra state=stopped
 
-- shell: "rm -rf /var/lib/cassandra/commitlog/*"
+- file:
+    path: "{{ cassandra_home }}/commitlog"
+    state: absent
   become: true
   when: cassandra_exists.changed
 
-- shell: "rm -rf /var/lib/cassandra/saved_caches/*"
+- file:
+    path: "{{ cassandra_home }}/saved_caches"
+    state: absent
   become: true
   when: cassandra_exists.changed
 
-- shell: "rm -rf /var/lib/cassandra/data/system/*"
+- file:
+    path: "{{ cassandra_home }}/data/system"
+    state: absent
   become: true
   when: cassandra_exists.changed
 
