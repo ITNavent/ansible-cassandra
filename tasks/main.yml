@@ -85,6 +85,14 @@
     mode: '0644'
     backup: yes
 
+
+- name: copy cassandra jvm.options
+  template:
+    src: jvm.options.j2
+    dest: /etc/cassandra/jvm.options
+    mode: '0644'
+    backup: yes
+
 - name: restart cassandra
   command: echo "cassandra configuration changed"
   notify: restart cassandra
