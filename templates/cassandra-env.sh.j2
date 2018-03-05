@@ -261,6 +261,10 @@ else
   #JVM_OPTS="$JVM_OPTS -Djavax.net.ssl.trustStorePassword=<truststore-password>"
 fi
 
+
+#Se agrega para evitar errores de jmx
+JVM_OPTS="$JVM_OPTS -Djmx.remote.x.notification.buffer.size=5000"
+
 # jmx authentication and authorization options. By default, auth is only
 # activated for remote connections but they can also be enabled for local only JMX
 ## Basic file based authn & authz
