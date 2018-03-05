@@ -129,3 +129,4 @@ back_pressure_strategy_factor: 5
 back_pressure_strategy_flow: FAST
 
 cdc_raw_directory: "{{ cassandra_home }}/cdc_raw"
+#jvm_xmx: "8G"
