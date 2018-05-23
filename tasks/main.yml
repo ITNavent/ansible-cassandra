@@ -28,6 +28,14 @@
     state: absent
   become: yes
 
+- name: Create data folder
+  when: "{{ data_file_directories is defined }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: "{{ data_file_directories }}"
+  become: yes
+
 ## install cassandra
 - name: Add cassandra deb repository
   apt_repository:
