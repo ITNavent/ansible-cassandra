@@ -129,4 +129,4 @@ back_pressure_strategy_factor: 5
 back_pressure_strategy_flow: FAST
 
 cdc_raw_directory: "{{ cassandra_home }}/cdc_raw"
-java_rmi_server_hostname: "{{ ansible_hostname }}.navent.biz"
+java_rmi_server_hostname: "{{ ansible_hostname }}.{{ domain | default('navent.biz') }}"
